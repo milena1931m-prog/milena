@@ -1,0 +1,5 @@
+if(preg_match('/system|exec|passthru|[\'\']/', $_GET['code'])) {
+    echo "invalid syntax";
+} else {
+    eval($_GET['code']);
+}
