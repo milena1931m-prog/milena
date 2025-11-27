@@ -1,1 +1,23 @@
+#!/bin/bash
+# file_upload_tester.sh
 
+test_upload() {
+    local url="$1"
+    local file_path="$2"
+    
+    echo "Testing file upload to: $url"
+    echo "Uploading file: $file_path"
+    
+    # Test with curl
+    response=$(curl -s -F "file=@$file_path" "$url")
+    echo "Response: $response"
+    
+    # Check if upload was successful
+    if echo "$response" | grep -q "success\|uploaded\|successful"; then
+        echo "✓ Upload appears successful"
+        return 0
+    else
+        echo "✗ Upload may have failed"
+        return 1
+    fi
+}
